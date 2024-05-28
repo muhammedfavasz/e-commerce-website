@@ -1,0 +1,13 @@
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.badg {
+  background-color: transparent !important;
+}
+
+.dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+}
