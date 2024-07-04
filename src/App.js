@@ -14,31 +14,18 @@ import Footer from "./component/Home/Footer";
 import Shop from "./component/Home/Shop";
 import { auth } from "./component/Home/configAdmin/fireBase";
 import LoginError from "./component/Home/LoginError";
+import { data } from "./product"; // Import data
 
 function App() {
-  const [carousalData, setCarousalData] = useState([]);
-  const [productData, setProductData] = useState([]);
+  const [carousalData, setCarousalData] = useState(data.carousal); // Initialize with imported data
+  const [productData, setProductData] = useState(data.product); // Initialize with imported data
 
   const user = auth.currentUser;
 
-  const handleFetchCarousalData = async () => {
-    const response = await fetch("http://localhost:3000/carousal");
-    const data = await response.json();
-    setCarousalData(data);
-  };
-  const handleFetchProductData = async () => {
-    const response = await fetch("http://localhost:3000/product");
-    const data = await response.json();
-    setProductData(data);
-  };
-
   useEffect(() => {
-    handleFetchCarousalData();
-    handleFetchProductData();
-  }, []);
-
-  localStorage.setItem("carousal", JSON.stringify(carousalData));
-  localStorage.setItem("product", JSON.stringify(productData));
+    localStorage.setItem("carousal", JSON.stringify(carousalData));
+    localStorage.setItem("product", JSON.stringify(productData));
+  }, []); // Update localStorage when data changes
 
   return (
     <div className="App">

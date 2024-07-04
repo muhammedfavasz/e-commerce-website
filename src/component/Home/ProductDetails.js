@@ -5,28 +5,19 @@ import Rating from "../Rating";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../../store/cartSlice";
 import "../style.css";
-import SingleProdect from "./HomeSingleProd";
-
+import { data } from "../../product";
 const ProductDetails = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
   useEffect(() => {
-    // Fetch product details based on productId
-    const fetchProductDetails = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/product/${productId}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setProduct(data);
-        }
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-      }
+    // Find product details based on productId
+    const fetchProductDetails = () => {
+      const productData = data.product.find((prod) => prod.id === parseInt(productId));
+      setProduct(productData);
     };
 
     fetchProductDetails();
